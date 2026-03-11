@@ -7,7 +7,6 @@ import {
   Github,
   Linkedin,
   Mail,
-  ExternalLink,
   Download,
   Code,
   Palette,
@@ -65,15 +64,15 @@ export default function Portfolio() {
     {
       name: "Frontend Development",
       icon: Code,
-      technologies: ["HTML","CSS","React","JavaScript","Bootstrap"],
+      technologies: ["HTML", "CSS", "React", "JavaScript", "Bootstrap"],
     },
     {
       name: "Backend Development",
       icon: Server,
       technologies: ["Node.js", "JavaScript", "Express js", "MangoDB", "SQL"],
     },
-    { name: "Database", icon: Database, technologies: ["SQL", "MongoDB"] },
-    { name: "Languages & Ai", icon: Globe, technologies: ["Java", "Python", "Machine Learning", "Deep Learning","Computer Vision","NLP"] },
+    { name: "Database", icon: Database, technologies: ["SQL", "MongoDB", "Firebase"] },
+    { name: "Languages & Ai", icon: Globe, technologies: ["Java", "Python", "Machine Learning", "Deep Learning", "Computer Vision", "NLP"] },
   ]
 
   const projects = [
@@ -84,7 +83,6 @@ export default function Portfolio() {
       image: "/images/spam-photo.jpg",
       technologies: ["MACHINE LEARNING"],
       github: "https://github.com/Naveen-R-77",
-      live: "#",
     },
     {
       title: "Plant Disease Detection using Deep Learning",
@@ -92,7 +90,6 @@ export default function Portfolio() {
       image: "/images/DL-photo.jpg",
       technologies: ["DEEP LEARNING", "CNN", "PYTHON"],
       github: "https://github.com/Naveen-R-77",
-      live: "#",
     },
     {
       title: "Face Liveness Detection",
@@ -100,7 +97,6 @@ export default function Portfolio() {
       image: "/images/live-photo.jpg",
       technologies: ["HTML", "CSS", "CNN", "OPEN CV"],
       github: "https://github.com/Naveen-R-77",
-      live: "#",
     },
     {
       title: "Resort Booking System",
@@ -108,20 +104,45 @@ export default function Portfolio() {
       image: "/images/resort-photo.jpg",
       technologies: ["Java", "MySQL"],
       github: "https://github.com/Naveen-R-77",
-      live: "#",
+    },
+    {
+      title: "Inventory Management System",
+      description: "Built an inventory management web app with React frontend and Firebase integration. Enabled product tracking, categorization, and basic inventory reports.",
+      image: "/images/inventory-system.jpg",
+      technologies: ["React", "JavaScript", "HTML", "CSS", "Firebase"],
+      github: "https://github.com/Naveen-R-77",
+    },
+    {
+      title: "PlantCare AI – Plant Disease Detection & Crop Advisory",
+      description: "Built an AI-powered platform for plant disease detection, crop advisory, and multilingual chatbot using Google Gemini AI. Implemented secure authentication, weather-based recommendations, analytics dashboard, and a mobile-friendly PWA.",
+      image: "/images/plant-care.png",
+      technologies: ["React", "Node.js", "Express.js", "MongoDB", "Google Gemini AI", "Weather API", "EmailJS"],
+      github: "https://github.com/Naveen-R-77",
+    },
+    {
+      title: "Health Tracker – Mobile Application",
+      description: "Developed a Flutter-based mobile app to track daily health activities and user data. Built a clean, responsive UI with focus on performance and usability.",
+      image: "/images/health-tracker.png",
+      technologies: ["Flutter", "Dart"],
+      github: "https://github.com/Naveen-R-77",
+    },
+    {
+      title: "Smart Supermarket System",
+      description: "Built a full-stack ERP & POS system with real-time inventory, barcode billing, low-stock alerts, and automated reorder emails to suppliers. Integrated Firebase real-time sync and a Google Gemini AI assistant for smart retail insights.",
+      image: "/images/smart-supermarket.jpg",
+      technologies: ["Next.js", "React", "TypeScript", "Tailwind CSS", "Firebase", "Google Gemini AI"],
+      github: "https://github.com/Naveen-R-77",
     },
   ]
 
   const experiences = [
     {
       title: "💼 Work Experience",
-      company: " ",
-      period: "2025 - Present",
-      location: "TamilNadu, INDIA",
+
       description:
         "While I may not have formal industry experience yet, I've actively built a strong foundation through hands-on projects, practical learning, and technical exploration. Below is an overview of my journey so far",
     },
-   
+
   ]
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -134,7 +155,7 @@ export default function Portfolio() {
     setResult(null)
     try {
       await emailjs.send(
-        'service_mpnw7l2',
+        'service_naqkvvd',
         'template_ctoncvb',
         {
           title: form.subject,
@@ -147,8 +168,9 @@ export default function Portfolio() {
       setResult('Message sent successfully!')
       setForm({ name: '', email: '', subject: '', message: '' })
       if (formRef.current) formRef.current.reset()
-    } catch (error) {
-      setResult('Failed to send message. Please try again later.')
+    } catch (error: any) {
+      console.error('EmailJS Error details:', error);
+      setResult(`Failed to send message: ${error?.text || 'Check console for details'}`);
     } finally {
       setSending(false)
     }
@@ -166,9 +188,8 @@ export default function Portfolio() {
                 <button
                   key={section}
                   onClick={() => scrollToSection(section)}
-                  className={`capitalize transition-colors hover:text-primary ${
-                    activeSection === section ? "text-primary font-medium" : "text-muted-foreground"
-                  }`}
+                  className={`capitalize transition-colors hover:text-primary ${activeSection === section ? "text-primary font-medium" : "text-muted-foreground"
+                    }`}
                 >
                   {section}
                 </button>
@@ -187,9 +208,13 @@ export default function Portfolio() {
               >
                 <Linkedin className="w-5 h-5" />
               </Link>
-              <Link href="#" className="text-muted-foreground hover:text-primary transition-colors">
+              <button
+                onClick={() => scrollToSection("contact")}
+                className="text-muted-foreground hover:text-primary transition-colors"
+                aria-label="Contact"
+              >
                 <Mail className="w-5 h-5" />
-              </Link>
+              </button>
             </div>
           </div>
         </div>
@@ -202,7 +227,7 @@ export default function Portfolio() {
             <div className="space-y-8">
               <div className="space-y-4">
                 <h1 className="text-5xl lg:text-7xl font-bold leading-tight">
-                AI Engineer
+                  AI Engineer
                   <span className="block text-primary">& Full Stack Developer</span>
                 </h1>
                 <p className="text-xl text-muted-foreground max-w-lg">
@@ -214,19 +239,17 @@ export default function Portfolio() {
                 <Button size="lg" onClick={() => scrollToSection("projects")}>
                   View My Work
                 </Button>
-                <Button variant="outline" size="lg" className="gap-2 bg-transparent">
-                  <Download className="w-4 h-4" />
-                  Download Resume
+                <Button variant="outline" size="lg" className="gap-2 bg-transparent" asChild>
+                  <a href="/resume.pdf" download="Naveen_R_Resume.pdf">
+                    <Download className="w-4 h-4" />
+                    Download Resume
+                  </a>
                 </Button>
               </div>
               <div className="flex items-center gap-8 text-sm text-muted-foreground">
                 <div className="flex items-center gap-2">
                   <MapPin className="w-4 h-4" />
                   TamilNadu, INDIA
-                </div>
-                <div className="flex items-center gap-2">
-                  <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse" />
-                  Available for work
                 </div>
               </div>
             </div>
@@ -254,16 +277,16 @@ export default function Portfolio() {
               <div className="space-y-4">
                 <h2 className="text-4xl font-bold">About Me</h2>
                 <p className="text-lg text-muted-foreground leading-relaxed">
-                I am currently pursuing my third year of B.Tech in Artificial Intelligence and Machine Learning at Kongu Engineering College.
-                 With a passion for building innovative and impactful digital solutions, I have successfully completed 5+ projects spanning various domains in software development.
+                  I am currently pursuing B.Tech in Artificial Intelligence and Machine Learning at Kongu Engineering College.
+                  With a passion for building innovative and impactful digital solutions, I have successfully completed 8+ projects spanning various domains in software development.
                 </p>
                 <p className="text-lg text-muted-foreground leading-relaxed">
-                My core expertise lies in full-stack web development, where I specialize in JavaScript technologies including React.js, Node.js, Express, and MongoDB. I have hands-on experience working with both frontend and backend technologies,
-                 enabling me to develop responsive user interfaces as well as robust server-side applications.
+                  My core expertise lies in full-stack web development, where I specialize in JavaScript technologies including React.js, Node.js, Express, and MongoDB. I have hands-on experience working with both frontend and backend technologies,
+                  enabling me to develop responsive user interfaces as well as robust server-side applications.
                 </p>
                 <p className="text-lg text-muted-foreground leading-relaxed">
-                Driven by curiosity and a continuous learning mindset, I enjoy turning complex problems into simple, user-friendly solutions.
-                 I am actively enhancing my skills and looking forward to contributing to real-world projects and collaborative development environments.
+                  Driven by curiosity and a continuous learning mindset, I enjoy turning complex problems into simple, user-friendly solutions.
+                  I am actively enhancing my skills and looking forward to contributing to real-world projects and collaborative development environments.
                 </p>
               </div>
               <div className="grid grid-cols-2 gap-6">
@@ -279,7 +302,7 @@ export default function Portfolio() {
                     <Code className="w-5 h-5" />
                     <span className="font-semibold">Projects</span>
                   </div>
-                  <p className="text-2xl font-bold">5+ Completed</p>
+                  <p className="text-2xl font-bold">8+ Completed</p>
                 </div>
               </div>
             </div>
@@ -358,12 +381,6 @@ export default function Portfolio() {
                         Code
                       </Link>
                     </Button>
-                    <Button size="sm" asChild>
-                      <Link href={project.live} className="gap-2">
-                        <ExternalLink className="w-4 h-4" />
-                        Live Demo
-                      </Link>
-                    </Button>
                   </div>
                 </div>
                 <CardHeader>
@@ -400,16 +417,6 @@ export default function Portfolio() {
                     <div>
                       <CardTitle className="text-xl">{exp.title}</CardTitle>
                       <CardDescription className="text-lg font-medium text-primary">{exp.company}</CardDescription>
-                    </div>
-                    <div className="flex flex-col md:items-end gap-1">
-                      <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                        <Calendar className="w-4 h-4" />
-                        {exp.period}
-                      </div>
-                      <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                        <MapPin className="w-4 h-4" />
-                        {exp.location}
-                      </div>
                     </div>
                   </div>
                 </CardHeader>
