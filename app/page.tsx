@@ -257,7 +257,7 @@ export default function Portfolio() {
               <div className="relative w-full max-w-md mx-auto">
                 <div className="absolute inset-0 bg-gradient-to-r from-primary/20 to-purple-500/20 rounded-full blur-3xl" />
                 <Image
-                  src="/images/hero3-photo.jpg"
+                  src="/images/naveen.png"
                   alt="Naveen Ramesh"
                   width={400}
                   height={500}
